@@ -1,2 +1,0 @@
-webpackJsonp([1],{AIhE:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=n("/jXN"),r=n("PJE+"),c=o.module("app",[r]),a=n("/jXN"),p=function(){function e(e){this.name="test",alert(1)}return e.$inject=["$scope"],e}();c.controller("MainController",p),a.bootstrap(document,["app"])}},["AIhE"]);
-//# sourceMappingURL=app.js.map

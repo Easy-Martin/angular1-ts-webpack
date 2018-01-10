@@ -1,9 +1,6 @@
-let angular = require('angular');
-import homeRouter from '../module/home/router'
-import mainRouter from '../module/main/router'
-declare let require:any;
+// let angular = require('angular');
+// declare let require:any;
 
-export let routing = angular.module('app.controllers', [
-    homeRouter,
-    mainRouter
-]).name;
+// export let routing = angular.module('app.controllers', [
+
+// ]).name;

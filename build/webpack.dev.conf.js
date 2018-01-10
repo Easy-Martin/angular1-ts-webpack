@@ -45,6 +45,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        resolve: {
+          extensions: ['', '.ts', '.tsx']
+        }
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
