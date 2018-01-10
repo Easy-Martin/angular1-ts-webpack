@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+      "removeComments": true,
+      "module": "amd",
+      "noImplicitAny": true,
+      "declaration": false,
+      "target": "ES5",
+      "sourceMap": false,
+      "allowJs": true,
+      "typeRoots": [
+        "node_modules/@types",
+        "src/@types"
+      ],
+      "lib": [
+        "es2015",
+        "es5",
+        "dom"
+      ],
+      "rootDir": "./",
+      "outDir": ""
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  
