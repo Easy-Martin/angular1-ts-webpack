@@ -32,15 +32,15 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    // new UglifyJsPlugin({
-    //   uglifyOptions: {
-    //     compress: {
-    //       warnings: false
-    //     }
-    //   },
-    //   sourceMap: config.build.productionSourceMap,
-    //   parallel: true
-    // }),
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: {
+          warnings: false
+        }
+      },
+      sourceMap: config.build.productionSourceMap,
+      parallel: true
+    }),
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].css'),
@@ -98,14 +98,42 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       minChunks: Infinity
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'vendor-core',
+      children: true,
+      minChunks (module,count) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.(ts|js)$/.test(module.resource) &&
+          module.resource.indexOf(
+            path.join(__dirname, '../src/core')
+          ) === 0 &&  count >= 2
+        )
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'vendor-services',
+      children: true,
+      minChunks (module,count) {
+        console.log(path.join(__dirname, '../src/services'),module.resource)
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.(ts|js)$/.test(module.resource) &&
+          module.resource.indexOf(
+            path.join(__dirname, '../src/services')
+          ) === 0 &&  count >= 2
+        )
+      }
+    }),
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
     // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'app',
-      async: 'vendor-async',
+      async: 'vendor-commons',
       children: true,
-      minChunks: 3
+      minChunks: 2
     }),
 
     // copy custom static assets
